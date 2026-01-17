@@ -1,53 +1,25 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-#include <string.h> // 文字列操作（strcpyなど）に必要
-
-#define MAX_TASKS 5      // 最大タスク数
-#define MAX_LENGTH 50    // 1つのタスクの最大文字数
+#include <stdlib.h>
+#include <time.h>
 
 int main() {
-    char tasks[MAX_TASKS][MAX_LENGTH]; // 2次元配列（タスクの保管庫）
-    int taskCount = 0;                 // 現在のタスク数
-    int choice;
+    // 1. 言葉のリスト（辞書）を作る
+    // 配列の数は、{}の中身の数に合わせて自動で決まります
+    const char* omikuji[] = { "大吉", "中吉", "小吉", "末吉", "凶" };
 
-    printf("--- シンプルToDoリスト ---\n");
+    srand((unsigned int)time(NULL));
 
-    while (1) {
-        printf("\n1:追加, 2:表示, 3:終了 ＞ ");
-        if (scanf("%d", &choice) != 1) break;
+    printf("今日の運勢を占うに！\n");
+    printf("Enterキーを押してな...");
+    getchar(); // キー入力を待つ
 
-        if (choice == 1) {
-            // タスクの追加
-            if (taskCount < MAX_TASKS) {
-                printf("タスクを入力してな：");
-                scanf("%s", tasks[taskCount]); // 配列の[taskCount]番目に保存
-                taskCount++;
-                printf("追加したに！\n");
-            }
-            else {
-                printf("もういっぱいやわ。整理してな。\n");
-            }
-        }
-        else if (choice == 2) {
-            // タスクの表示
-            printf("\n【 現在のタスク一覧 】\n");
-            if (taskCount == 0) {
-                printf("タスクは一つもないよ。\n");
-            }
-            else {
-                for (int i = 0; i < taskCount; i++) {
-                    printf("%d: %s\n", i + 1, tasks[i]);
-                }
-            }
-        }
-        else if (choice == 3) {
-            printf("お疲れさん！終了するに。\n");
-            break;
-        }
-        else {
-            printf("1から3で選んでな。\n");
-        }
-    }
+    // 2. 0～4の乱数を作る
+    int result = rand() % 5;
+
+    // 3. 数字を言葉に変換して表示！
+    printf("結果は... 【 %s 】 やに！\n", omikuji[result]);
 
     return 0;
 }
+
